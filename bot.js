@@ -10,15 +10,21 @@ bot.on('ready', () => {
 });
 
 bot.on('voiceChannelJoin', (member, newChannel) => {
-    bot.createMessage(channelId, `${member.username}が${newChannel.name}に入室しました。`);
+    if (!member.bot) {
+        bot.createMessage(channelId, `${member.username}が${newChannel.name}に入室しました。`);
+    }
 });
 
 bot.on('voiceChannelLeave', (member, oldChannel) => {
-    bot.createMessage(channelId, `${member.username}が${oldChannel.name}から退室しました。`);
+    if (!member.bot) {
+        bot.createMessage(channelId, `${member.username}が${oldChannel.name}から退室しました。`);
+    }
 });
 
 bot.on('voiceChannelSwitch', (member, newChannel, oldChannel) => {
-    bot.createMessage(channelId, `${member.username}が${oldChannel.name}から${newChannel.name}に移動しました。`);
+    if (!member.bot) {
+        bot.createMessage(channelId, `${member.username}が${oldChannel.name}から${newChannel.name}に移動しました。`);
+    }
 });
 
 bot.connect();
